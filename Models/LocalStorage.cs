@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DesignPattern
+
+namespace Models
 {
     public sealed class LocalStorage
     {
@@ -23,11 +24,6 @@ namespace DesignPattern
                 return instance;
 
             }
-        }
-
-        public void AddEmploye(Employe employe) 
-        {
-            
         }
 
     }
