@@ -6,7 +6,7 @@ namespace Controllers
 {
     public static class EmployeController
     {
-        public static int id = 0;
+        private static int id = 0;
         public static Employe GetInfosEmploye(string nom, string prenom, double salaire) 
         {
             id += 1;
