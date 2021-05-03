@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Entities;
+using System;
 using System.Collections.Generic;
-using Models;
+
 
 namespace Controllers
 {

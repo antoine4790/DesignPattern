@@ -7,10 +7,12 @@
 
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="5.0.2" />
+    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Controllers\Controllers.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
 </Project>

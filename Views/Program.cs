@@ -2,14 +2,21 @@
 using static System.Console;
 using static Controllers.Tools;
 using static Controllers.EmployeController;
-using Models;
+using Entities;
+using Unity;
 
-namespace DesignPattern
+namespace Views
 {
     public class Program
     {
         public static void Main()
         {
+            //Créer le container Unity
+            IUnityContainer unitycontainer = new UnityContainer();
+
+            //Lie les implémentations aux interfaces correspondantes
+            unitycontainer.RegisterType<IEmployeService, EmployeService>();
+
             string option = "";
             do
             {
