@@ -4,6 +4,7 @@ using static Controllers.Tools;
 using static Controllers.EmployeController;
 using Entities;
 using Unity;
+using Controllers;
 
 namespace Views
 {
@@ -11,11 +12,11 @@ namespace Views
     {
         public static void Main()
         {
-            //Créer le container Unity
-            IUnityContainer unitycontainer = new UnityContainer();
+            ////Créer le container Unity
+            //IUnityContainer unitycontainer = new UnityContainer();
 
-            //Lie les implémentations aux interfaces correspondantes
-            unitycontainer.RegisterType<IEmployeService, EmployeService>();
+            ////Lie les implémentations aux interfaces correspondantes
+            //unitycontainer.RegisterType<IEmployeService, EmployeService>();
 
             string option = "";
             do
@@ -28,26 +29,34 @@ namespace Views
                             "0- Quitter le menu"
                             );
                 option = GetStringFromCmdLine("Quel numéro choisissez vous?");
+                EmployeController employeController = new EmployeController();
                 switch (option)
                 {
                     case "1":
                         Employe EmployeToAdd = GetInfosEmploye("Robuchon", "Joel", 10000);
-                        AddEmploye(EmployeToAdd);
+                        
+                        employeController.AddEmploye(EmployeToAdd);
                         Console.WriteLine($"Employe {EmployeToAdd.ToString()}");
                         break;
                     case "2":
-                        foreach (var employe in GetListeEmployes())
-                        {
+                        foreach (var employe in employeController.GetListeEmployes())
                             Console.WriteLine($"{employe.ToString()}");
-                        }
                         break;
                     case "3":
                         int idToSearch = GetIntegerFromCmdLine("Entrez le numero de l'employé à rechercher");
-                        Employe result = GetListeEmployes().Find(e => e.Id == idToSearch);
-                        if (result is null)
-                            Console.WriteLine("Aucun employe trouvé");
-                        else
-                            Console.WriteLine($"{result.ToString()}");
+                        try
+                        {
+                            Employe result = employeController.GetEmploye(idToSearch);
+                            if (result is null)
+                                Console.WriteLine("Aucun employe trouvé");
+                            else
+                                Console.WriteLine($"{result.ToString()}");
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine($"Erreur rencontrée lors de la recherche d'un employe par son Id");
+                            Console.WriteLine(e.Message);
+                        }
                         break;
                     default:
                         break;

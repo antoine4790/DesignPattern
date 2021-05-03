@@ -1,13 +1,15 @@
 ﻿using Entities;
 using System;
 using System.Collections.Generic;
+using Business;
 
 
 namespace Controllers
 {
-    public static class EmployeController
+    public class EmployeController
     {
         private static int id = 0;
+        public EmployeService EmployeService { get; set; } = new EmployeService();
         public static Employe GetInfosEmploye(string nom, string prenom, double salaire) 
         {
             id += 1;
@@ -15,23 +17,18 @@ namespace Controllers
             return employe;
         }
 
-        public static bool AddEmploye(Employe employeToAdd)
+        public List<Employe> AddEmploye(Employe employeToAdd)
         {
-            try
-            {
-                LocalStorage.Instance.ListeEmployes.Add(employeToAdd);
-                return true;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Impossible d'ajouter l'employe");
-                return false;
-            }
-            
+            return EmployeService.AddEmploye(employeToAdd);
         }
-        public static List<Employe> GetListeEmployes() 
+        public List<Employe> GetListeEmployes()
         {
-            return LocalStorage.Instance.ListeEmployes;
+            return EmployeService.GetListeEmployes();
+        }
+
+        public Employe GetEmploye(int idToSearch) 
+        {
+            return EmployeService.GetEmploye(idToSearch);
         }
     }
 }

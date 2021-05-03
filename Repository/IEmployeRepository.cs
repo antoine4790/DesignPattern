@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business
+namespace Repository
 {
-    public interface IEmployeService
+    //Contient toutes les règles sur la persistance des données
+    interface IEmployeRepository
     {
         public List<Employe> GetListeEmployes();
         public Employe GetEmploye(int id);
